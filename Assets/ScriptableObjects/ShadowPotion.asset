@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad08903a98eeea6409fd65519d25feb4, type: 3}
   m_Name: ShadowPotion
   m_EditorClassIdentifier: 
-  potionTexture: {fileID: 0}
+  potionTexture: {fileID: 2800000, guid: d06a72887f04cd7498e2548c2fa42bad, type: 3}
   type: 1
   stackCount: 0
+  hasCrafted: 0

@@ -9,7 +9,11 @@ public class Potion : ScriptableObject
 {
     [SerializeField] public Texture potionTexture;
 
-    [DoNotSerialize] public PotionType type;
+    public GameObject slotObject;
 
-    [DoNotSerialize] public int stackCount = 0;
+    public PotionType type;
+
+    public int stackCount = 0;
+
+    public bool hasCrafted = false;
 }
