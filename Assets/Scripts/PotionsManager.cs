@@ -68,9 +68,20 @@ public class PotionsManager : MonoBehaviour
             }
 
             potion.hasCrafted = true;
-            // Update to place in the postion it needs to go
-            var newPotionSlot = Instantiate(newPotion, SelectedSlotPosition.transform);
-            potion.slotObject = newPotionSlot;
+            GameObject newPotionSlot = null;
+            if (SelectedSlotPosition.transform.childCount == 0)
+                newPotionSlot = Instantiate(newPotion, SelectedSlotPosition.transform);
+            else if (SlotPositionOne.transform.childCount == 0)
+                newPotionSlot = Instantiate(newPotion, SlotPositionOne.transform);
+            else if (SlotPositionTwo.transform.childCount == 0)
+                newPotionSlot = Instantiate(newPotion, SlotPositionTwo.transform);
+            else if (SlotPositionThree.transform.childCount == 0)
+                newPotionSlot = Instantiate(newPotion, SlotPositionThree.transform);
+            else
+                Debug.Log("Game's broken broski");
+
+            if (newPotionSlot != null)
+                potion.slotObject = newPotionSlot;
         }
         else
         {

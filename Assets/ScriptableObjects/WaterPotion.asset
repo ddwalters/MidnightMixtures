@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: WaterPotion
   m_EditorClassIdentifier: 
   potionTexture: {fileID: 2800000, guid: fbaea49f5f2fb7346b1cfbb56292b722, type: 3}
+  slotObject: {fileID: 0}
   type: 0
   stackCount: 0
   hasCrafted: 0
