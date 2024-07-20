@@ -8,6 +8,7 @@ public class PotionThrow : MonoBehaviour
 
     [SerializeField] GameObject reticlePrefab; // The reticle object to indicate where the potion will land
     [SerializeField] GameObject glassParticle;
+    public bool broken = false;
     public float throwSpeed = 10f; // Speed of the thrown potion
     public float maxThrowDistance = 5f; // Maximum distance the potion can be thrown
     public float maxArcHeight = 2f; // Maximum height of the arc
@@ -143,7 +144,9 @@ public class PotionThrow : MonoBehaviour
     {
         // Implement the logic to break the potion here
         // For example, instantiate a break effect and destroy the potion
-        Instantiate(glassParticle, potion.transform.position, Quaternion.identity);
+        Instantiate(glassParticle, potion.transform.position, Quaternion.Euler(-90, 0, 0));
+        var potionFX = potion.GetComponent<potionEffect>();
+        potionFX.potionBreak(potion);
         Destroy(potion);
     }
 }

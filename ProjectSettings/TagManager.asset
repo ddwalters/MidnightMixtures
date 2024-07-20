@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - water
   layers:
   - Default
   - TransparentFX
@@ -44,14 +45,11 @@ TagManager:
   - name: Env_Base
     uniqueID: 4182908345
     locked: 0
-  - name: Env_Obj
-    uniqueID: 4256916979
-    locked: 0
-  - name: Env_water
-    uniqueID: 2294071663
-    locked: 0
   - name: Player
     uniqueID: 721330133
+    locked: 0
+  - name: Potions
+    uniqueID: 1479236581
     locked: 0
   - name: UI
     uniqueID: 3856679755

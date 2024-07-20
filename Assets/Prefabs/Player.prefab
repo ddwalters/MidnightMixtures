@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1301576750897245842}
   - component: {fileID: 7376510463496295805}
   - component: {fileID: 3579351667127060089}
+  - component: {fileID: 1689659388830920293}
   - component: {fileID: 1624418642161887863}
   - component: {fileID: 6206352729215097887}
   - component: {fileID: 7034670881620402932}
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 721330133
-  m_SortingLayer: 4
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0f39a9205e4394ee1b6ba8269428d176, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -115,6 +116,52 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!61 &1689659388830920293
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8617501777376898205}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: -0.2}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2, y: 2}
+    newSize: {x: 0.32, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.8, y: 1.4}
+  m_EdgeRadius: 0
 --- !u!114 &1624418642161887863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,8 +211,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c32e265fc9e4042b7d1227138cbf4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  potionManager: {fileID: 0}
-  potionPrefab: {fileID: 1689899905661626793, guid: 9b1196b024ec902458faeff540ac2d0e, type: 3}
   reticlePrefab: {fileID: 5179933866243478173, guid: 91056aaa6b8e29e4b9d6cba4a20678d8, type: 3}
   glassParticle: {fileID: 730381331910705193, guid: a803ab962f049f645b63737d73d12193, type: 3}
   throwSpeed: 8
