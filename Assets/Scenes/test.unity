@@ -1467,6 +1467,11 @@ Transform:
   - {fileID: 603456527}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &577775323 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6230035230882792458, guid: 0a6a428852e5f7c478a8602ad28296e6, type: 3}
+  m_PrefabInstance: {fileID: 2007902639}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &603456526
 GameObject:
   m_ObjectHideFlags: 0
@@ -16867,6 +16872,11 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &739254178 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7638797874002870760, guid: 0a6a428852e5f7c478a8602ad28296e6, type: 3}
+  m_PrefabInstance: {fileID: 2007902639}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &910261034
 GameObject:
   m_ObjectHideFlags: 0
@@ -26999,6 +27009,11 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1311054936 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9194250579532859446, guid: 0a6a428852e5f7c478a8602ad28296e6, type: 3}
+  m_PrefabInstance: {fileID: 2007902639}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1429492461
 GameObject:
   m_ObjectHideFlags: 0
@@ -28028,6 +28043,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIPackage
       objectReference: {fileID: 0}
+    - target: {fileID: 9024078570019044946, guid: 0a6a428852e5f7c478a8602ad28296e6, type: 3}
+      propertyPath: slotPositions.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9024078570019044946, guid: 0a6a428852e5f7c478a8602ad28296e6, type: 3}
+      propertyPath: 'slotPositions.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1311054936}
+    - target: {fileID: 9024078570019044946, guid: 0a6a428852e5f7c478a8602ad28296e6, type: 3}
+      propertyPath: 'slotPositions.Array.data[1]'
+      value: 
+      objectReference: {fileID: 577775323}
+    - target: {fileID: 9024078570019044946, guid: 0a6a428852e5f7c478a8602ad28296e6, type: 3}
+      propertyPath: 'slotPositions.Array.data[2]'
+      value: 
+      objectReference: {fileID: 739254178}
+    - target: {fileID: 9024078570019044946, guid: 0a6a428852e5f7c478a8602ad28296e6, type: 3}
+      propertyPath: 'slotPositions.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2135038605}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -28205,6 +28240,11 @@ MonoBehaviour:
   maxThrowDistance: 6
   maxArcHeight: 2
   rotationSpeed: 360
+--- !u!1 &2135038605 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 754170192991955139, guid: 0a6a428852e5f7c478a8602ad28296e6, type: 3}
+  m_PrefabInstance: {fileID: 2007902639}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
