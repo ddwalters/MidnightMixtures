@@ -19,8 +19,8 @@ public class PotionsManager : MonoBehaviour
     [SerializeField] GameObject potionSlotPrefab;
     [SerializeField] GameObject[] slotPositions;
 
-    [SerializedTupleLabels("Sprite", "Prefab", "EmptySprite", "EmptyPrefab")]
-    public SerializedTuple<Sprite, GameObject, Sprite, GameObject> waterPotion;
+    [SerializedTupleLabels("Sprite", "Prefab", "EmptySprite")]
+    public SerializedTuple<Sprite, GameObject, Sprite> waterPotion;
     [SerializedTupleLabels("Sprite", "Prefab")]
     public SerializedTuple<Sprite, GameObject> shadowPotion;
     [SerializedTupleLabels("Sprite", "Prefab")]
@@ -165,7 +165,6 @@ public class PotionsManager : MonoBehaviour
         if (selectedPotion.potionType == PotionType.Water)
         {
             selectedPotion.potionTexture = waterPotion.v3;
-            selectedPotion.potionPrefab = waterPotion.v4;
             
             if (selectedPotion.stackCount > 1)
             {
