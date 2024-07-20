@@ -897,10 +897,10 @@ MonoBehaviour:
   SlotPositionOne: {fileID: 2100370496178060180}
   SlotPositionTwo: {fileID: 59265999020224073}
   SlotPositionThree: {fileID: 9123167578977996975}
-  waterPotion: {fileID: 11400000, guid: fcac5a371cbf1fd4b95afd486355328f, type: 2}
-  shadowPotion: {fileID: 11400000, guid: 109df5a9f03f1b042a6e5858d1c30c16, type: 2}
-  potionThree: {fileID: 11400000, guid: fcac5a371cbf1fd4b95afd486355328f, type: 2}
-  potionFour: {fileID: 11400000, guid: 109df5a9f03f1b042a6e5858d1c30c16, type: 2}
+  waterPotionSprite: {fileID: 5017218206756039146, guid: dc18342adaba5ba4587a019c606fdf32, type: 3}
+  shadowPotionSprite: {fileID: 5096652739223892754, guid: dc18342adaba5ba4587a019c606fdf32, type: 3}
+  FlashTextureSprite: {fileID: -7295369170862774710, guid: dc18342adaba5ba4587a019c606fdf32, type: 3}
+  ExplosionTextureSprite: {fileID: -1446897371287034496, guid: dc18342adaba5ba4587a019c606fdf32, type: 3}
 --- !u!1 &9123167578977996975
 GameObject:
   m_ObjectHideFlags: 0

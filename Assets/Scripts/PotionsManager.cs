@@ -8,8 +8,8 @@ public enum PotionType
 {
     Water,
     Shadow,
-    PotionThree,
-    PotionFour
+    Flash,
+    Explosion
 }
 
 public class PotionsManager : MonoBehaviour
@@ -21,10 +21,23 @@ public class PotionsManager : MonoBehaviour
     [SerializeField] GameObject SlotPositionTwo;
     [SerializeField] GameObject SlotPositionThree;
 
-    [SerializeField] Potion waterPotion;
-    [SerializeField] Potion shadowPotion;
-    [SerializeField] Potion potionThree;
-    [SerializeField] Potion potionFour;
+    [SerializeField] Sprite waterPotionSprite;
+    [SerializeField] Sprite shadowPotionSprite;
+    [SerializeField] Sprite FlashTextureSprite;
+    [SerializeField] Sprite ExplosionTextureSprite;
+
+    Potion waterPotion;
+    Potion shadowPotion;
+    Potion flashPotion;
+    Potion explosionPotion;
+
+    private void Start()
+    {
+        waterPotion = new Potion(waterPotionSprite, PotionType.Water);
+        shadowPotion = new Potion(shadowPotionSprite, PotionType.Shadow);
+        flashPotion = new Potion(FlashTextureSprite, PotionType.Flash);
+        explosionPotion = new Potion(ExplosionTextureSprite, PotionType.Explosion);
+    }
 
     public void AddPotion(Potion potion)
     {
@@ -37,7 +50,7 @@ public class PotionsManager : MonoBehaviour
                 return;
             }
 
-            RawImage childImage = newPotion.transform.GetChild(0).GetComponent<RawImage>();
+            SpriteRenderer childImage = newPotion.transform.GetChild(0).GetComponent<SpriteRenderer>();
             if (childImage == null)
             {
                 Debug.LogError("No Image component found on the child GameObject.");
@@ -51,20 +64,31 @@ public class PotionsManager : MonoBehaviour
                 return;
             }
 
-            if (potion == waterPotion)
+            switch (potion.potionType)
             {
-                waterPotion.stackCount++;
-
-                childImage.texture = waterPotion.potionTexture;
-                childText.text = $"{waterPotion.stackCount}";
-            }
-
-            if (potion == shadowPotion)
-            {
-                shadowPotion.stackCount++;
-
-                childImage.texture = shadowPotion.potionTexture;
-                childText.text = $"{shadowPotion.stackCount}";
+                case PotionType.Water:
+                    waterPotion.stackCount++;
+                    childImage.sprite = waterPotion.potionTexture;
+                    childText.text = $"{waterPotion.stackCount}";
+                    break;
+                case PotionType.Shadow:
+                    shadowPotion.stackCount++;
+                    childImage.sprite = shadowPotion.potionTexture;
+                    childText.text = $"{shadowPotion.stackCount}";
+                    break;
+                case PotionType.Flash:
+                    flashPotion.stackCount++;
+                    childImage.sprite = flashPotion.potionTexture;
+                    childText.text = $"{flashPotion.stackCount}";
+                    break;
+                case PotionType.Explosion:
+                    explosionPotion.stackCount++;
+                    childImage.sprite = explosionPotion.potionTexture;
+                    childText.text = $"{explosionPotion.stackCount}";
+                    break;
+                default:
+                    Debug.Log("Definitly broken homie");
+                    return;
             }
 
             potion.hasCrafted = true;
@@ -85,7 +109,7 @@ public class PotionsManager : MonoBehaviour
         }
         else
         {
-            RawImage childImage = potion.slotObject.transform.GetChild(0).GetComponent<RawImage>();
+            SpriteRenderer childImage = potion.slotObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
             if (childImage == null)
             {
                 Debug.LogError("No Image component found on the child GameObject.");
@@ -99,55 +123,84 @@ public class PotionsManager : MonoBehaviour
                 return;
             }
 
-            if (potion == waterPotion)
+            switch (potion.potionType)
             {
-                waterPotion.stackCount++;
-                childText.text = $"{waterPotion.stackCount}";
-            }
-
-            if (potion == shadowPotion)
-            {
-                shadowPotion.stackCount++;
-                childText.text = $"{shadowPotion.stackCount}";
+                case PotionType.Water:
+                    waterPotion.stackCount++;
+                    childText.text = $"{waterPotion.stackCount}";
+                    break;
+                case PotionType.Shadow:
+                    shadowPotion.stackCount++;
+                    childText.text = $"{shadowPotion.stackCount}";
+                    break;
+                case PotionType.Flash:
+                    waterPotion.stackCount++;
+                    childText.text = $"{waterPotion.stackCount}";
+                    break;
+                case PotionType.Explosion:
+                    shadowPotion.stackCount++;
+                    childText.text = $"{shadowPotion.stackCount}";
+                    break;
+                default:
+                    Debug.Log("Definitly broken homie");
+                    return;
             }
         }
     }
 
     public bool UsePotion()
     {
-        if (waterPotion.stackCount <= 0)
+        var currentSelectedPotion = waterPotion;
+
+        if (currentSelectedPotion.stackCount <= 0)
         {
             Debug.Log("Out of potions");
             return false;
         }
 
-        RawImage childImage = waterPotion.slotObject.transform.GetChild(0).GetComponent<RawImage>();
+        SpriteRenderer childImage = currentSelectedPotion.slotObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
         if (childImage == null)
         {
             Debug.LogError("No Image component found on the child GameObject.");
             return false;
         }
 
-        TextMeshProUGUI childText = waterPotion.slotObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI childText = currentSelectedPotion.slotObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
         if (childText == null)
         {
             Debug.LogError("No TextMeshPro component found on the child GameObject.");
             return false;
         }
 
-        if (waterPotion == waterPotion)
+        switch (currentSelectedPotion.potionType)
         {
-            waterPotion.stackCount--;
-            childText.text = $"{waterPotion.stackCount}";
-        }
-
-        if (waterPotion == shadowPotion)
-        {
-            shadowPotion.stackCount--;
-            childText.text = $"{shadowPotion.stackCount}";
+            case PotionType.Water:
+                waterPotion.stackCount--;
+                childText.text = $"{waterPotion.stackCount}";
+                break;
+            case PotionType.Shadow:
+                shadowPotion.stackCount--;
+                childText.text = $"{shadowPotion.stackCount}";
+                break;
+            case PotionType.Flash:
+                waterPotion.stackCount--;
+                childText.text = $"{waterPotion.stackCount}";
+                break;
+            case PotionType.Explosion:
+                shadowPotion.stackCount--;
+                childText.text = $"{shadowPotion.stackCount}";
+                break;
+            default:
+                Debug.Log("Definitly broken homie");
+                return false;
         }
 
         return true;
+    }
+
+    public void TestWaterButton()
+    {
+        AddPotion(waterPotion);
     }
 
     public void TestShadowButton()
@@ -155,8 +208,13 @@ public class PotionsManager : MonoBehaviour
         AddPotion(shadowPotion);
     }
 
-    public void TestWaterButton()
+    public void TestFlashButton()
     {
-        AddPotion(waterPotion);
+        AddPotion(flashPotion);
+    }
+
+    public void TestExplosionButton()
+    {
+        AddPotion(explosionPotion);
     }
 }
