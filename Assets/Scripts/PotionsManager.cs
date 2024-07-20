@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using SerializedTuples;
+using SerializedTuples.Runtime;
 
 public enum PotionType
 {
@@ -16,10 +18,15 @@ public class PotionsManager : MonoBehaviour
 {
     [SerializeField] GameObject potionSlotPrefab;
     [SerializeField] GameObject[] slotPositions;
-    [SerializeField] Sprite waterPotionSprite;
-    [SerializeField] Sprite shadowPotionSprite;
-    [SerializeField] Sprite flashTextureSprite;
-    [SerializeField] Sprite explosionTextureSprite;
+
+    [SerializedTupleLabels("Sprite", "Prefab", "EmptySprite", "EmptyPrefab")]
+    public SerializedTuple<Sprite, GameObject, Sprite, GameObject> waterPotion;
+    [SerializedTupleLabels("Sprite", "Prefab")]
+    public SerializedTuple<Sprite, GameObject> shadowPotion;
+    [SerializedTupleLabels("Sprite", "Prefab")]
+    public SerializedTuple<Sprite, GameObject> flashPotion;
+    [SerializedTupleLabels("Sprite", "Prefab")]
+    public SerializedTuple<Sprite, GameObject> explosionPotion;
 
     Potion selectedPotion;
     List<Potion> potions;
@@ -35,24 +42,43 @@ public class PotionsManager : MonoBehaviour
 
         if (potion == null)
         {
+            if (potions.Count >= 4) {
+                Debug.Log("Max of 4 potion types");
+                return;
+            }
+
+            GameObject potionPrefab = null;
             Sprite potionSprite = null;
             switch (potionType)
             {
                 case PotionType.Water:
-                    potionSprite = waterPotionSprite;
+                    potionSprite = waterPotion.v1;
+                    potionPrefab = waterPotion.v2;
                     break;
                 case PotionType.Shadow:
-                    potionSprite = shadowPotionSprite;
+                    potionSprite = shadowPotion.v1;
+                    potionPrefab = shadowPotion.v2;
                     break;
                 case PotionType.Flash:
-                    potionSprite = flashTextureSprite;
+                    potionSprite = flashPotion.v1;
+                    potionPrefab = flashPotion.v2;
                     break;
                 case PotionType.Explosion:
-                    potionSprite = explosionTextureSprite;
+                    potionSprite = explosionPotion.v1;
+                    potionPrefab = explosionPotion.v2;
                     break;
+                default:
+                    Debug.Log("Unexcepted potion type");
+                    return;
             }
 
-            potion = new Potion(potionSprite, potionType);
+            if (potionSprite == null || potionPrefab == null)
+            {
+                Debug.Log("Missing potion sprite or prefab");
+                return;
+            }
+
+            potion = new Potion(potionPrefab, potionSprite, potionType);
             int latestIndexWithStackCount = -1;
             for (int i = 0; i < potions.Count; i++)
             {
@@ -65,6 +91,7 @@ public class PotionsManager : MonoBehaviour
                 if (slotPositions[i].transform.childCount == 0)
                 {
                     GameObject newPotionSlot = Instantiate(potionSlotPrefab, slotPositions[i].transform);
+
                     potion.slotObject = newPotionSlot;
                     potion.hasCrafted = true;
                     potion.stackCount++;
@@ -82,9 +109,34 @@ public class PotionsManager : MonoBehaviour
                 selectedPotion = potion;
         }
         else
-            potion.stackCount++;
+        {
+            if (potionType == PotionType.Water)
+                FillWater();
+            else
+                potion.stackCount++;
+        }
 
         UpdatePotionUI();
+    }
+
+    public void FillWater()
+    {
+        if (selectedPotion.potionType != PotionType.Water)
+        {
+            Debug.Log("User must have water selected to fill");
+            return;
+        }
+
+        if (selectedPotion.stackCount > 0)
+        {
+            Debug.Log("Water is already filled");
+            return;
+        }
+
+        selectedPotion.potionTexture = waterPotion.v1;
+        selectedPotion.potionPrefab = waterPotion.v2;
+
+        selectedPotion.stackCount++;
     }
 
     public void SelectPotion(PotionType type)
@@ -144,7 +196,21 @@ public class PotionsManager : MonoBehaviour
 
     public bool UsePotion()
     {
-        if (selectedPotion == null) return false;
+        if (selectedPotion == null || selectedPotion.stackCount <= 0) return false;
+
+        if (selectedPotion.potionType == PotionType.Water)
+        {
+            selectedPotion.potionTexture = waterPotion.v3;
+            selectedPotion.potionPrefab = waterPotion.v4;
+            
+            if (selectedPotion.stackCount > 1)
+            {
+                selectedPotion.stackCount = 0;
+                UpdatePotionUI();
+
+                return true;
+            }
+        }
 
         selectedPotion.stackCount--;
         UpdatePotionUI();
@@ -152,6 +218,8 @@ public class PotionsManager : MonoBehaviour
         return true;
     }
 
+    public GameObject GetSelectedPotionPrefab() => selectedPotion.potionPrefab;
+    
     private void UpdatePotionUI()
     {
         for (int i = 0; i < potions.Count; i++)
@@ -183,6 +251,11 @@ public class PotionsManager : MonoBehaviour
 
             childImage.sprite = potion.potionTexture;
             childText.text = $"{potion.stackCount}";
+
+            if (potion.potionType == PotionType.Water)
+                childText.alpha = 0.0f;
+            else
+                childText.alpha = 1.0f;
         }
     }
 
