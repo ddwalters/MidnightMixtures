@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class PotionThrow : MonoBehaviour
 {
-    [SerializeField] PotionsManager potionManager; // The potion object to be thrown
+    PotionsManager potionManager;
 
-    [SerializeField] GameObject potionPrefab; // The potion object to be thrown
     [SerializeField] GameObject reticlePrefab; // The reticle object to indicate where the potion will land
     [SerializeField] GameObject glassParticle;
     public float throwSpeed = 10f; // Speed of the thrown potion
@@ -55,36 +54,30 @@ public class PotionThrow : MonoBehaviour
     void ShowReticle()
     {
         if (reticleInstance == null)
-        {
             reticleInstance = Instantiate(reticlePrefab);
-        }
+
         reticleInstance.SetActive(true);
         UpdateReticlePosition();
     }
 
     void UpdateReticlePosition()
     {
-        // Calculate the direction and distance to the target position
         Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
         float distance = Vector2.Distance(targetPosition, transform.position);
 
-        // Clamp the distance to the maximum throw distance
         if (distance > maxThrowDistance)
         {
             distance = maxThrowDistance;
             targetPosition = (Vector2)transform.position + direction * distance;
         }
 
-        // Update the reticle position
         reticleInstance.transform.position = targetPosition;
     }
 
     void HideReticle()
     {
         if (reticleInstance != null)
-        {
             reticleInstance.SetActive(false);
-        }
     }
 
     void ThrowPotion()
@@ -108,13 +101,8 @@ public class PotionThrow : MonoBehaviour
             targetPosition = (Vector2)transform.position + direction * distance;
         }
 
-        // Calculate the arc height based on the throw distance
         float arcHeight = Mathf.Min(maxArcHeight, maxArcHeight * (distance / maxThrowDistance));
-
-        // Instantiate the potion at the character's position
-        GameObject potion = Instantiate(potionPrefab, transform.position, Quaternion.identity);
-
-        // Move the potion towards the target position with an arc
+        GameObject potion = Instantiate(potionManager.GetSelectedPotionPrefab(), transform.position, Quaternion.identity);
         StartCoroutine(MovePotionWithArc(potion.transform, targetPosition, throwSpeed, arcHeight));
     }
 
@@ -132,11 +120,8 @@ public class PotionThrow : MonoBehaviour
             float height = Mathf.Sin(Mathf.PI * t) * arcHeight;
             obj.position = Vector3.Lerp(start, end, t) + new Vector3(0, height, 0);
 
-            // Rotate the potion
-
             obj.Rotate(0, 0, rotationSpeed * Time.deltaTime);
 
-            // Scale the potion
             float scale = Mathf.Lerp(0.8f, 1.2f, Mathf.Sin(Mathf.PI * t));
             obj.localScale = originalScale * scale;
 
@@ -145,7 +130,6 @@ public class PotionThrow : MonoBehaviour
         }
         obj.position = end; // Ensure the final position is set to the end position
 
-        // Break the potion
         BreakPotion(obj.gameObject);
     }
 
