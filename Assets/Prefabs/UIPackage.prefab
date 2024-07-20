@@ -2805,10 +2805,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   potionSlotPrefab: {fileID: 1798416416564776149, guid: 64c43b50908824a48a697f13c766e300, type: 3}
-  SelectedSlotPosition: {fileID: 9194250579532859446}
-  slotPositionOne: {fileID: 6230035230882792458}
-  slotPositionTwo: {fileID: 7638797874002870760}
-  slotPositionThree: {fileID: 754170192991955139}
+  slotPositions:
+  - {fileID: 9194250579532859446}
+  - {fileID: 6230035230882792458}
+  - {fileID: 7638797874002870760}
+  - {fileID: 754170192991955139}
   waterPotionSprite: {fileID: 5017218206756039146, guid: dc18342adaba5ba4587a019c606fdf32, type: 3}
   shadowPotionSprite: {fileID: 5096652739223892754, guid: dc18342adaba5ba4587a019c606fdf32, type: 3}
   flashTextureSprite: {fileID: -7295369170862774710, guid: dc18342adaba5ba4587a019c606fdf32, type: 3}
