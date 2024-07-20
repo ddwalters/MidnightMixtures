@@ -14,19 +14,22 @@ public enum PotionType
 
 public class PotionsManager : MonoBehaviour
 {
-    [SerializeField] GameObject PotionSlotPrefab;
+    [SerializeField] GameObject potionSlotPrefab;
 
     [SerializeField] GameObject SelectedSlotPosition;
-    [SerializeField] GameObject SlotPositionOne;
-    [SerializeField] GameObject SlotPositionTwo;
-    [SerializeField] GameObject SlotPositionThree;
+    [SerializeField] GameObject slotPositionOne;
+    [SerializeField] GameObject slotPositionTwo;
+    [SerializeField] GameObject slotPositionThree;
 
     [SerializeField] Sprite waterPotionSprite;
     [SerializeField] Sprite shadowPotionSprite;
-    [SerializeField] Sprite FlashTextureSprite;
-    [SerializeField] Sprite ExplosionTextureSprite;
+    [SerializeField] Sprite flashTextureSprite;
+    [SerializeField] Sprite explosionTextureSprite;
 
-    Potion SelectedPotion;
+    Potion selectedPotion;
+    Potion sidePotion1;
+    Potion sidePotion2;
+    Potion sidePotion3;
 
     Potion waterPotion;
     Potion shadowPotion;
@@ -37,22 +40,22 @@ public class PotionsManager : MonoBehaviour
     {
         waterPotion = new Potion(waterPotionSprite, PotionType.Water);
         shadowPotion = new Potion(shadowPotionSprite, PotionType.Shadow);
-        flashPotion = new Potion(FlashTextureSprite, PotionType.Flash);
-        explosionPotion = new Potion(ExplosionTextureSprite, PotionType.Explosion);
+        flashPotion = new Potion(flashTextureSprite, PotionType.Flash);
+        explosionPotion = new Potion(explosionTextureSprite, PotionType.Explosion);
     }
 
     public void AddPotion(Potion potion)
     {
         if (!potion.hasCrafted)
         {
-            var newPotion = PotionSlotPrefab;
+            var newPotion = potionSlotPrefab;
             if (newPotion == null)
             {
                 Debug.LogError("slotWithPotion is not assigned.");
                 return;
             }
 
-            SpriteRenderer childImage = newPotion.transform.GetChild(0).GetComponent<SpriteRenderer>();
+            Image childImage = newPotion.transform.GetChild(0).GetComponent<Image>();
             if (childImage == null)
             {
                 Debug.LogError("No Image component found on the child GameObject.");
@@ -97,15 +100,24 @@ public class PotionsManager : MonoBehaviour
             GameObject newPotionSlot = null;
             if (SelectedSlotPosition.transform.childCount == 0)
             {
-                SelectedPotion = potion;
+                selectedPotion = potion;
                 newPotionSlot = Instantiate(newPotion, SelectedSlotPosition.transform);
             }
-            else if (SlotPositionOne.transform.childCount == 0)
-                newPotionSlot = Instantiate(newPotion, SlotPositionOne.transform);
-            else if (SlotPositionTwo.transform.childCount == 0)
-                newPotionSlot = Instantiate(newPotion, SlotPositionTwo.transform);
-            else if (SlotPositionThree.transform.childCount == 0)
-                newPotionSlot = Instantiate(newPotion, SlotPositionThree.transform);
+            else if (slotPositionOne.transform.childCount == 0)
+            {
+                sidePotion1 = potion;
+                newPotionSlot = Instantiate(newPotion, slotPositionOne.transform);
+            }
+            else if (slotPositionTwo.transform.childCount == 0)
+            {
+                sidePotion2 = potion;
+                newPotionSlot = Instantiate(newPotion, slotPositionTwo.transform);
+            }
+            else if (slotPositionThree.transform.childCount == 0)
+            {
+                sidePotion3 = potion;
+                newPotionSlot = Instantiate(newPotion, slotPositionThree.transform);
+            }
             else
                 Debug.Log("Game's broken broski");
 
@@ -114,7 +126,7 @@ public class PotionsManager : MonoBehaviour
         }
         else
         {
-            SpriteRenderer childImage = potion.slotObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
+            Image childImage = potion.slotObject.transform.GetChild(0).GetComponent<Image>();
             if (childImage == null)
             {
                 Debug.LogError("No Image component found on the child GameObject.");
@@ -175,6 +187,30 @@ public class PotionsManager : MonoBehaviour
         }
     }
 
+    public void CyclePotion()
+    {
+        if (sidePotion1 == null || sidePotion2 == null || sidePotion3 == null || selectedPotion == null)
+        {
+            Debug.LogError("One or more potions are null.");
+            return;
+        }
+
+        // Store references to the potions
+        Potion tempSelectedPotion = selectedPotion;
+        Potion tempSidePotion1 = sidePotion1;
+        Potion tempSidePotion2 = sidePotion2;
+        Potion tempSidePotion3 = sidePotion3;
+
+        // Cycle the potions
+        selectedPotion = tempSidePotion1;
+        sidePotion1 = tempSidePotion2;
+        sidePotion2 = tempSidePotion3;
+        sidePotion3 = tempSelectedPotion;
+
+        // update ui ???
+        Debug.Log(selectedPotion.potionType);
+    }
+
     private void SwapPotionHelper(Potion newSelection)
     {
         if (newSelection == null)
@@ -183,21 +219,21 @@ public class PotionsManager : MonoBehaviour
             return;
         }
 
-        SpriteRenderer currentChildImage = SelectedPotion.slotObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        Image currentChildImage = selectedPotion.slotObject.transform.GetChild(0).GetComponent<Image>();
         if (currentChildImage == null)
         {
             Debug.LogError("No Image component found on the child GameObject of the selected potion.");
             return;
         }
 
-        TextMeshProUGUI currentChildText = SelectedPotion.slotObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI currentChildText = selectedPotion.slotObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
         if (currentChildText == null)
         {
             Debug.LogError("No TextMeshPro component found on the child GameObject of the selected potion.");
             return;
         }
 
-        SpriteRenderer newChildImage = newSelection.slotObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        Image newChildImage = newSelection.slotObject.transform.GetChild(0).GetComponent<Image>();
         if (newChildImage == null)
         {
             Debug.LogError("No Image component found on the child GameObject of the new selection.");
@@ -222,12 +258,12 @@ public class PotionsManager : MonoBehaviour
         newChildText.text = tempText;
 
         // Swap the slotObject references
-        GameObject tempSlotObject = SelectedPotion.slotObject;
-        SelectedPotion.slotObject = newSelection.slotObject;
+        GameObject tempSlotObject = selectedPotion.slotObject;
+        selectedPotion.slotObject = newSelection.slotObject;
         newSelection.slotObject = tempSlotObject;
 
         // Update the SelectedPotion reference
-        SelectedPotion = newSelection;
+        selectedPotion = newSelection;
     }
 
     public bool UsePotion()
@@ -240,7 +276,7 @@ public class PotionsManager : MonoBehaviour
             return false;
         }
 
-        SpriteRenderer childImage = currentSelectedPotion.slotObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        Image childImage = currentSelectedPotion.slotObject.transform.GetChild(0).GetComponent<Image>();
         if (childImage == null)
         {
             Debug.LogError("No Image component found on the child GameObject.");
@@ -265,12 +301,12 @@ public class PotionsManager : MonoBehaviour
                 childText.text = $"{shadowPotion.stackCount}";
                 break;
             case PotionType.Flash:
-                waterPotion.stackCount--;
-                childText.text = $"{waterPotion.stackCount}";
+                flashPotion.stackCount--;
+                childText.text = $"{flashPotion.stackCount}";
                 break;
             case PotionType.Explosion:
-                shadowPotion.stackCount--;
-                childText.text = $"{shadowPotion.stackCount}";
+                explosionPotion.stackCount--;
+                childText.text = $"{explosionPotion.stackCount}";
                 break;
             default:
                 Debug.Log("Definitly broken homie");
