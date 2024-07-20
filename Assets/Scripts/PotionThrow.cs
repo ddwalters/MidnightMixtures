@@ -1,8 +1,11 @@
 using System.Collections;
+using System.Resources;
 using UnityEngine;
 
 public class PotionThrow : MonoBehaviour
 {
+    [SerializeField] PotionsManager potionManager; // The potion object to be thrown
+
     [SerializeField] GameObject potionPrefab; // The potion object to be thrown
     [SerializeField] GameObject reticlePrefab; // The reticle object to indicate where the potion will land
     [SerializeField] GameObject glassParticle;
@@ -13,6 +16,11 @@ public class PotionThrow : MonoBehaviour
     private Vector2 targetPosition;
     private bool isDragging = false;
     private GameObject reticleInstance;
+
+    private void Start()
+    {
+        potionManager = FindAnyObjectByType<PotionsManager>();
+    }
 
     void Update()
     {
@@ -81,6 +89,14 @@ public class PotionThrow : MonoBehaviour
 
     void ThrowPotion()
     {
+        bool status = potionManager.UsePotion();
+
+        if (!status)
+        {
+            Debug.Log("out of potions");
+            return;
+        }
+
         // Calculate the direction and distance to the target position
         Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
         float distance = Vector2.Distance(targetPosition, transform.position);

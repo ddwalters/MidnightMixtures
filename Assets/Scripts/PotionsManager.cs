@@ -113,6 +113,43 @@ public class PotionsManager : MonoBehaviour
         }
     }
 
+    public bool UsePotion()
+    {
+        if (waterPotion.stackCount <= 0)
+        {
+            Debug.Log("Out of potions");
+            return false;
+        }
+
+        RawImage childImage = waterPotion.slotObject.transform.GetChild(0).GetComponent<RawImage>();
+        if (childImage == null)
+        {
+            Debug.LogError("No Image component found on the child GameObject.");
+            return false;
+        }
+
+        TextMeshProUGUI childText = waterPotion.slotObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        if (childText == null)
+        {
+            Debug.LogError("No TextMeshPro component found on the child GameObject.");
+            return false;
+        }
+
+        if (waterPotion == waterPotion)
+        {
+            waterPotion.stackCount--;
+            childText.text = $"{waterPotion.stackCount}";
+        }
+
+        if (waterPotion == shadowPotion)
+        {
+            shadowPotion.stackCount--;
+            childText.text = $"{shadowPotion.stackCount}";
+        }
+
+        return true;
+    }
+
     public void TestShadowButton()
     {
         AddPotion(shadowPotion);
