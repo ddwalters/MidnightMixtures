@@ -119,26 +119,6 @@ public class PotionsManager : MonoBehaviour
         UpdatePotionUI();
     }
 
-    public void FillWater()
-    {
-        if (selectedPotion.potionType != PotionType.Water)
-        {
-            Debug.Log("User must have water selected to fill");
-            return;
-        }
-
-        if (selectedPotion.stackCount > 0)
-        {
-            Debug.Log("Water is already filled");
-            return;
-        }
-
-        selectedPotion.potionTexture = waterPotion.v1;
-        selectedPotion.potionPrefab = waterPotion.v2;
-
-        selectedPotion.stackCount++;
-    }
-
     public void SelectPotion(PotionType type)
     {
         Potion potionToSelect = potions.Find(potion => potion.potionType == type);
@@ -147,6 +127,8 @@ public class PotionsManager : MonoBehaviour
         else
             Debug.Log("Definitely broken homie");
     }
+
+    public GameObject GetSelectedPotionPrefab() => selectedPotion.potionPrefab;
 
     public void CyclePotion()
     {
@@ -170,26 +152,6 @@ public class PotionsManager : MonoBehaviour
             if (potions[i].slotObject != null)
                 potions[i].slotObject.transform.SetParent(slotPositions[i].transform, false);
         }
-
-        UpdatePotionUI();
-    }
-
-
-    private void SwapPotionHelper(Potion newSelection)
-    {
-        if (newSelection == null)
-        {
-            Debug.LogError("New selection potion is null.");
-            return;
-        }
-
-        // Swap the slotObject references
-        GameObject tempSlotObject = selectedPotion.slotObject;
-        selectedPotion.slotObject = newSelection.slotObject;
-        newSelection.slotObject = tempSlotObject;
-
-        // Update the SelectedPotion reference
-        selectedPotion = newSelection;
 
         UpdatePotionUI();
     }
@@ -218,8 +180,43 @@ public class PotionsManager : MonoBehaviour
         return true;
     }
 
-    public GameObject GetSelectedPotionPrefab() => selectedPotion.potionPrefab;
-    
+    private void SwapPotionHelper(Potion newSelection)
+    {
+        if (newSelection == null)
+        {
+            Debug.LogError("New selection potion is null.");
+            return;
+        }
+
+        GameObject tempSlotObject = selectedPotion.slotObject;
+        selectedPotion.slotObject = newSelection.slotObject;
+        newSelection.slotObject = tempSlotObject;
+
+        selectedPotion = newSelection;
+
+        UpdatePotionUI();
+    }
+
+    private void FillWater()
+    {
+        if (selectedPotion.potionType != PotionType.Water)
+        {
+            Debug.Log("User must have water selected to fill");
+            return;
+        }
+
+        if (selectedPotion.stackCount > 0)
+        {
+            Debug.Log("Water is already filled");
+            return;
+        }
+
+        selectedPotion.potionTexture = waterPotion.v1;
+        selectedPotion.potionPrefab = waterPotion.v2;
+
+        selectedPotion.stackCount++;
+    }
+
     private void UpdatePotionUI()
     {
         for (int i = 0; i < potions.Count; i++)

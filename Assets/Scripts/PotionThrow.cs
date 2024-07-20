@@ -83,10 +83,16 @@ public class PotionThrow : MonoBehaviour
     void ThrowPotion()
     {
         bool status = potionManager.UsePotion();
-
         if (!status)
         {
-            Debug.Log("out of potions");
+            Debug.Log("Out of potions");
+            return;
+        }
+
+        GameObject potionPrefab = potionManager.GetSelectedPotionPrefab();
+        if (!status)
+        {
+            Debug.Log("No potion prefab");
             return;
         }
 
@@ -102,7 +108,7 @@ public class PotionThrow : MonoBehaviour
         }
 
         float arcHeight = Mathf.Min(maxArcHeight, maxArcHeight * (distance / maxThrowDistance));
-        GameObject potion = Instantiate(potionManager.GetSelectedPotionPrefab(), transform.position, Quaternion.identity);
+        GameObject potion = Instantiate(potionPrefab, transform.position, Quaternion.identity);
         StartCoroutine(MovePotionWithArc(potion.transform, targetPosition, throwSpeed, arcHeight));
     }
 
