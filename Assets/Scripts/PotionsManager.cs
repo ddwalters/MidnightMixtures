@@ -153,6 +153,8 @@ public class PotionsManager : MonoBehaviour
                 potions[i].slotObject.transform.SetParent(slotPositions[i].transform, false);
         }
 
+        selectedPotion = potions[0];
+
         UpdatePotionUI();
     }
 
