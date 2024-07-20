@@ -52,7 +52,7 @@ public class PotionsManager : MonoBehaviour
                 return;
             }
 
-            SpriteRenderer childImage = newPotion.transform.GetChild(0).GetComponent<SpriteRenderer>();
+            Image childImage = newPotion.transform.GetChild(0).GetComponent<Image>();
             if (childImage == null)
             {
                 Debug.LogError("No Image component found on the child GameObject.");
@@ -114,7 +114,7 @@ public class PotionsManager : MonoBehaviour
         }
         else
         {
-            SpriteRenderer childImage = potion.slotObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
+            Image childImage = potion.slotObject.transform.GetChild(0).GetComponent<Image>();
             if (childImage == null)
             {
                 Debug.LogError("No Image component found on the child GameObject.");
@@ -183,7 +183,7 @@ public class PotionsManager : MonoBehaviour
             return;
         }
 
-        SpriteRenderer currentChildImage = SelectedPotion.slotObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        Image currentChildImage = SelectedPotion.slotObject.transform.GetChild(0).GetComponent<Image>();
         if (currentChildImage == null)
         {
             Debug.LogError("No Image component found on the child GameObject of the selected potion.");
@@ -197,7 +197,7 @@ public class PotionsManager : MonoBehaviour
             return;
         }
 
-        SpriteRenderer newChildImage = newSelection.slotObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        Image newChildImage = newSelection.slotObject.transform.GetChild(0).GetComponent<Image>();
         if (newChildImage == null)
         {
             Debug.LogError("No Image component found on the child GameObject of the new selection.");
@@ -240,7 +240,7 @@ public class PotionsManager : MonoBehaviour
             return false;
         }
 
-        SpriteRenderer childImage = currentSelectedPotion.slotObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        Image childImage = currentSelectedPotion.slotObject.transform.GetChild(0).GetComponent<Image>();
         if (childImage == null)
         {
             Debug.LogError("No Image component found on the child GameObject.");
