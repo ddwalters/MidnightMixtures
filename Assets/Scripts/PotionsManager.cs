@@ -200,12 +200,6 @@ public class PotionsManager : MonoBehaviour
 
     private void FillWater()
     {
-        if (selectedPotion.potionType != PotionType.Water)
-        {
-            Debug.Log("User must have water selected to fill");
-            return;
-        }
-
         if (selectedPotion.stackCount > 0)
         {
             Debug.Log("Water is already filled");
