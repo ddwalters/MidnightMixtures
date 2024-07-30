@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using SerializedTuples;
 using SerializedTuples.Runtime;
 using UnityEngine;
@@ -19,11 +18,10 @@ public class potionEffect : MonoBehaviour
     [SerializedTupleLabels("waterSplash", "time", "EmptySprite")]
     public SerializedTuple<GameObject, float, Sprite> waterPotion;
 
-
     // Start is called before the first frame update
     void Start()
     {
-        
+        Time.timeScale = 1.0f;
     }
 
     // Update is called once per frame
@@ -34,9 +32,28 @@ public class potionEffect : MonoBehaviour
 
     public void potionBreak(GameObject potion)
     {
-        if(state == Effect.water)
+        if (state == Effect.water)
         {
-            Instantiate(waterPotion.v1, potion.transform.position, Quaternion.Euler(0, 0, 0));
+            GameObject splash = Instantiate(waterPotion.v1, potion.transform.position, Quaternion.identity);
+            StartCoroutine(FadeAndDestroy(splash, waterPotion.v2));
         }
     }
+
+    private IEnumerator FadeAndDestroy(GameObject splash, float duration)
+    {
+        SpriteRenderer spriteRenderer = splash.GetComponent<SpriteRenderer>();
+        Color originalColor = spriteRenderer.color;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha = Mathf.Lerp(1f, 0f, elapsedTime / duration);
+            spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+            yield return null;
+        }
+
+        Destroy(splash);
+    }
+
 }
