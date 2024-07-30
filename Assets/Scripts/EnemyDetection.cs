@@ -12,6 +12,8 @@ public class EnemyDetection : MonoBehaviour
     [SerializeField]
     float baseNoticeTimer = 5f;
 
+    float copyTimer;
+
     [SerializeField]
     float speedMultiplier = 1.5f;
 
@@ -19,12 +21,29 @@ public class EnemyDetection : MonoBehaviour
     {
         playerVis = FindAnyObjectByType<PlayerVisibility>().GetComponent<PlayerVisibility>();
         ai = gameObject.GetComponentInParent<EnemyAI>();
+
+        copyTimer = baseNoticeTimer;
     }
 
     private void Update()
     {
         if (inSight)
-            Notice();
+        {
+            var currentVis = playerVis.GetVisibility();
+            copyTimer -= Time.deltaTime * (currentVis);
+            Debug.Log(copyTimer);
+            
+            if (copyTimer < 0)
+            {
+                Debug.Log("In Sight");
+
+                ai.ActivateMovement();
+            }
+        }
+        else
+        {
+            copyTimer = baseNoticeTimer;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -32,6 +51,7 @@ public class EnemyDetection : MonoBehaviour
         if (collision.tag != "Player") return;
 
         inSight = true;
+        Debug.Log("In Sight");
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -39,19 +59,5 @@ public class EnemyDetection : MonoBehaviour
         if (collision.tag != "Player") return;
 
         inSight = false;
-    }
-
-    private void Notice()
-    {
-        var currentVis = playerVis.GetVisibility();
-        float timer = baseNoticeTimer;
-
-        while (timer > 0 && inSight)
-            timer -= Mathf.Exp(currentVis * speedMultiplier) * Time.deltaTime;
-
-        if (!inSight)
-            return;
-
-        ai.ActivateAttack();
     }
 }
