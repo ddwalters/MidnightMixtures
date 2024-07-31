@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2554175911419696275}
   - component: {fileID: 7507989227380318696}
   - component: {fileID: 945859188892305273}
+  - component: {fileID: -7370815587635938243}
   m_Layer: 0
   m_Name: ExplosivePotion
   m_TagString: Untagged
@@ -226,3 +227,44 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &-7370815587635938243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689899905661626793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5512755783d4364198c854f3a081878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 3
+  waterPotion:
+    v1: {fileID: 0}
+    nameMap:
+    - waterSplash
+    - time
+    v2: 0
+    v3: {fileID: 0}
+  shadowPotion:
+    v1: {fileID: 0}
+    nameMap:
+    - shadowPotion
+    - time
+    v2: 0
+    v3: {fileID: 0}
+  flashPotion:
+    v1: {fileID: 0}
+    nameMap:
+    - flashPotion
+    - time
+    v2: 0
+    v3: {fileID: 0}
+  explosionPotion:
+    v1: {fileID: 7616778485194701500, guid: 4653ab3b1ae1bf343a90c6e6f2c0440f, type: 3}
+    nameMap:
+    - explosionPotion
+    - time
+    v2: 1.5
+    v3: {fileID: 0}

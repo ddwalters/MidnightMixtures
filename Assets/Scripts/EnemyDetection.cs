@@ -51,7 +51,6 @@ public class EnemyDetection : MonoBehaviour
         if (collision.tag != "Player") return;
 
         inSight = true;
-        Debug.Log("In Sight");
     }
 
     private void OnTriggerExit2D(Collider2D collision)

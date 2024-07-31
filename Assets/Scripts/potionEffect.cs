@@ -1,7 +1,9 @@
 using System.Collections;
 using SerializedTuples;
 using SerializedTuples.Runtime;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class potionEffect : MonoBehaviour
 {
@@ -15,33 +17,64 @@ public class potionEffect : MonoBehaviour
 
     public Effect state;
 
-    [SerializedTupleLabels("waterSplash", "time", "EmptySprite")]
+    [SerializedTupleLabels("waterSplash", "time")]
     public SerializedTuple<GameObject, float, Sprite> waterPotion;
 
-    // Start is called before the first frame update
+    [SerializedTupleLabels("shadowPotion", "time")]
+    public SerializedTuple<GameObject, float, Sprite> shadowPotion;
+
+    [SerializedTupleLabels("flashPotion", "time")]
+    public SerializedTuple<GameObject, float, Sprite> flashPotion;
+
+    [SerializedTupleLabels("explosionPotion", "time")]
+    public SerializedTuple<GameObject, float, Sprite> explosionPotion;
+
     void Start()
     {
         Time.timeScale = 1.0f;
     }
 
-    // Update is called once per frame
-    void Update()
+    public float potionBreak(GameObject potion)
     {
+        float fadeTime = 1f;
+        Destroy(potion.GetComponent<SpriteRenderer>());
+        Destroy(potion.GetComponent<TrailRenderer>());
 
-    }
-
-    public void potionBreak(GameObject potion)
-    {
         if (state == Effect.water)
         {
             GameObject splash = Instantiate(waterPotion.v1, potion.transform.position, Quaternion.identity);
             StartCoroutine(FadeAndDestroy(splash, waterPotion.v2));
+            fadeTime = waterPotion.v2;
         }
+
+        if (state == Effect.shadow)
+        {
+            GameObject shadow = Instantiate(shadowPotion.v1, potion.transform.position, Quaternion.identity);
+            StartCoroutine(FadeAndDestroy(shadow, shadowPotion.v2));
+            fadeTime = shadowPotion.v2;
+        }
+
+        if (state == Effect.flash)
+        {
+            GameObject flash = Instantiate(flashPotion.v1, potion.transform.position, Quaternion.identity);
+            StartCoroutine(FadeAndDestroy(flash, flashPotion.v2));
+            fadeTime = flashPotion.v2;
+        }
+
+        if (state == Effect.explosion)
+        {
+            GameObject boom = Instantiate(explosionPotion.v1, potion.transform.position, Quaternion.identity);
+            StartCoroutine(FadeAndDestroy(boom, explosionPotion.v2));
+            fadeTime = explosionPotion.v2;
+        }
+
+        return fadeTime;
     }
 
     private IEnumerator FadeAndDestroy(GameObject splash, float duration)
     {
         SpriteRenderer spriteRenderer = splash.GetComponent<SpriteRenderer>();
+
         Color originalColor = spriteRenderer.color;
         float elapsedTime = 0f;
 
@@ -55,5 +88,4 @@ public class potionEffect : MonoBehaviour
 
         Destroy(splash);
     }
-
 }

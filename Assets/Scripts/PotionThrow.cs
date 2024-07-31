@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using System.Collections;
 using System.Resources;
 using UnityEngine;
@@ -24,6 +25,9 @@ public class PotionThrow : MonoBehaviour
 
     void Update()
     {
+        if (Input.mouseScrollDelta.y != 0)
+            potionManager.CyclePotion();
+
         if (Input.GetMouseButtonDown(0))
         {
             // Check if the click is on the character
@@ -143,10 +147,13 @@ public class PotionThrow : MonoBehaviour
     void BreakPotion(GameObject potion)
     {
         // Implement the logic to break the potion here
-        // For example, instantiate a break effect and destroy the potion
         Instantiate(glassParticle, potion.transform.position, Quaternion.Euler(-90, 0, 0));
+
         var potionFX = potion.GetComponent<potionEffect>();
-        potionFX.potionBreak(potion);
-        Destroy(potion);
+        float fadeTimer = 1f;
+        if (potionFX != null)
+            fadeTimer = potionFX.potionBreak(potion);
+
+        Destroy(potion, fadeTimer); // Delay destruction to allow coroutine to run
     }
 }
