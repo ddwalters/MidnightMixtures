@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerVisibility : MonoBehaviour
 {
     bool inShadow;
+    int inShadowLightCount = 0;
 
     [SerializeField]
     private int maxVisibility;
@@ -16,19 +17,28 @@ public class PlayerVisibility : MonoBehaviour
 
     public void IncreaseVisibility()
     {
+        if (inShadow)
+        {
+            inShadowLightCount++;
+            visibility = 0;
+            return;
+        }
+
         if (visibility >= maxVisibility) return;
         visibility++;
     }
 
     public void DecreaseVisibility()
     {
-        if (visibility <= 1) return;
-
         if (inShadow)
         {
-
+            if(inShadowLightCount >= 0)
+                inShadowLightCount--;
+            visibility = 0;
             return;
         }
+
+        if (visibility <= 1) return;
 
         visibility--;
     }
@@ -38,8 +48,24 @@ public class PlayerVisibility : MonoBehaviour
         return visibility;
     }
 
+    public bool GetInShadow() => inShadow;
+
     public void EnterShadow()
     {
+        inShadow = true;
+    }
+
+    public void ExitShadow()
+    {
         inShadow = false;
+
+        if (inShadowLightCount <= 1) return;
+
+        visibility = inShadowLightCount;
+
+        if (visibility > 3)
+            visibility = 3;
+
+        inShadowLightCount = 0;
     }
 }

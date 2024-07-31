@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShadowTrigger : MonoBehaviour
@@ -15,6 +13,20 @@ public class ShadowTrigger : MonoBehaviour
     {
         if (!collision.gameObject.CompareTag("Player")) return;
 
+        playerVis.EnterShadow();
+    }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (!collision.gameObject.CompareTag("Player") || !playerVis.GetInShadow()) return;
+
+        playerVis.ExitShadow();
+    }
+
+    public void ForceExitShadow()
+    {
+        if (!playerVis.GetInShadow()) return;
+
+        playerVis.ExitShadow();
     }
 }

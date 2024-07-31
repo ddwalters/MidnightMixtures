@@ -76,12 +76,18 @@ public class potionEffect : MonoBehaviour
         Color originalColor = spriteRenderer.color;
         float elapsedTime = 0f;
 
-        while (elapsedTime < duration)
+        while (elapsedTime < duration - 0.5f)
         {
             elapsedTime += Time.deltaTime;
             float alpha = Mathf.Lerp(1f, 0f, elapsedTime / duration);
             spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
             yield return null;
+        }
+
+        if (state == Effect.shadow)
+        {
+            var shadowTrigger = splash.GetComponent<ShadowTrigger>();
+            shadowTrigger.ForceExitShadow();
         }
 
         Destroy(splash);

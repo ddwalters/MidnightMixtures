@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Pathfinding;
 using UnityEngine;
 
@@ -35,9 +33,9 @@ public class GoblinCage : MonoBehaviour
 
     private void Update()
     {
-        if(escaped == true)
+        if (escaped == true)
         {
-            if(gameObject.transform == exit)
+            if (gameObject.transform == exit)
             {
                 Destroy(this);
             }
