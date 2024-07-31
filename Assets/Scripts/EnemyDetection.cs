@@ -16,6 +16,7 @@ public class EnemyDetection : MonoBehaviour
     {
         playerVis = FindAnyObjectByType<PlayerVisibility>().GetComponent<PlayerVisibility>();
         ai = gameObject.GetComponentInParent<EnemyAI>();
+        noticeSlider = FindObjectOfType<Slider>();
 
         copyTimer = baseNoticeTimer;
         noticeSlider.value = 0;

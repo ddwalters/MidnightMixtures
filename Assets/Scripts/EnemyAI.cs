@@ -5,11 +5,16 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     AIPath aiPath;
+    AIDestinationSetter dest;
+    GameObject Player;
 
     private void Start()
     {
         aiPath = GetComponent<AIPath>();
         aiPath.canMove = false;
+        Player = FindAnyObjectByType<PlayerMovement>().gameObject;
+        dest = GetComponent<AIDestinationSetter>();
+        dest.target = Player.transform;
     }
 
     public void ActivateMovement()
