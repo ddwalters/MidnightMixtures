@@ -225,6 +225,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 278ca18d1f50f7f469c3442be71460f4, type: 3}
+--- !u!114 &174663329 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4414896772683547779, guid: 0a6a428852e5f7c478a8602ad28296e6, type: 3}
+  m_PrefabInstance: {fileID: 3222483846658974913}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &247876902 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7197635991357965307, guid: 3f502f702a7b40147879fb86620fb4f8, type: 3}
@@ -615,6 +626,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7633973848486359145, guid: 47daa3ba6ddf77d449d099937fc1b694, type: 3}
+      propertyPath: noticeSlider
+      value: 
+      objectReference: {fileID: 174663329}
     - target: {fileID: 7759037238057174073, guid: 47daa3ba6ddf77d449d099937fc1b694, type: 3}
       propertyPath: target
       value: 
@@ -967,6 +982,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7633973848486359145, guid: 47daa3ba6ddf77d449d099937fc1b694, type: 3}
+      propertyPath: noticeSlider
+      value: 
+      objectReference: {fileID: 174663329}
     - target: {fileID: 7759037238057174073, guid: 47daa3ba6ddf77d449d099937fc1b694, type: 3}
       propertyPath: target
       value: 
@@ -1071,7 +1090,7 @@ Transform:
   m_GameObject: {fileID: 1047059393}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.6170807, y: -3.99999, z: -10}
+  m_LocalPosition: {x: -0.21783447, y: -3.99999, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12021,6 +12040,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7633973848486359145, guid: 47daa3ba6ddf77d449d099937fc1b694, type: 3}
+      propertyPath: noticeSlider
+      value: 
+      objectReference: {fileID: 174663329}
     - target: {fileID: 7759037238057174073, guid: 47daa3ba6ddf77d449d099937fc1b694, type: 3}
       propertyPath: target
       value: 
@@ -14112,29 +14135,61 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2744664103926174683, guid: 0a6a428852e5f7c478a8602ad28296e6, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 65
+    - target: {fileID: 1883758009592370841, guid: 0a6a428852e5f7c478a8602ad28296e6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2744664103926174683, guid: 0a6a428852e5f7c478a8602ad28296e6, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 18
+    - target: {fileID: 2798716353830210775, guid: 0a6a428852e5f7c478a8602ad28296e6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2798716353830210775, guid: 0a6a428852e5f7c478a8602ad28296e6, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2798716353830210775, guid: 0a6a428852e5f7c478a8602ad28296e6, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3179933995265724506, guid: 0a6a428852e5f7c478a8602ad28296e6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4414896772683547779, guid: 0a6a428852e5f7c478a8602ad28296e6, type: 3}
+      propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4414896772683547779, guid: 0a6a428852e5f7c478a8602ad28296e6, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4414896772683547779, guid: 0a6a428852e5f7c478a8602ad28296e6, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4414896772683547779, guid: 0a6a428852e5f7c478a8602ad28296e6, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5253233786165658324, guid: 0a6a428852e5f7c478a8602ad28296e6, type: 3}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5253233786165658324, guid: 0a6a428852e5f7c478a8602ad28296e6, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5985817352369760869, guid: 0a6a428852e5f7c478a8602ad28296e6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6894365991912735698, guid: 0a6a428852e5f7c478a8602ad28296e6, type: 3}
       propertyPath: m_Name
       value: UIPackage
       objectReference: {fileID: 0}
-    - target: {fileID: 9024078570019044946, guid: 0a6a428852e5f7c478a8602ad28296e6, type: 3}
-      propertyPath: waterPotion.nameMap.Array.size
-      value: 3
+    - target: {fileID: 8324969088271315363, guid: 0a6a428852e5f7c478a8602ad28296e6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

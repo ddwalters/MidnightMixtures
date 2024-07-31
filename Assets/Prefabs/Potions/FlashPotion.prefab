@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7421469529145635381}
   m_Layer: 0
   m_Name: FlashPotion
-  m_TagString: Untagged
+  m_TagString: flash
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

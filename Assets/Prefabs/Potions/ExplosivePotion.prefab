@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -7370815587635938243}
   m_Layer: 0
   m_Name: ExplosivePotion
-  m_TagString: Untagged
+  m_TagString: boom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

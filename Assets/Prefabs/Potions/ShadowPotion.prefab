@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2733757306219217785}
   m_Layer: 0
   m_Name: ShadowPotion
-  m_TagString: Untagged
+  m_TagString: shadow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -252,7 +252,7 @@ MonoBehaviour:
     nameMap:
     - shadowPotion
     - time
-    v2: 3
+    v2: 6
     v3: {fileID: 0}
   flashPotion:
     v1: {fileID: 0}

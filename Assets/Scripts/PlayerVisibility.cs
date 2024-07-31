@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerVisibility : MonoBehaviour
 {
+    bool inShadow;
+
     [SerializeField]
     private int maxVisibility;
     [SerializeField]
