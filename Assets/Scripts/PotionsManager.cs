@@ -1,10 +1,10 @@
+using SerializedTuples;
+using SerializedTuples.Runtime;
 using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using SerializedTuples;
-using SerializedTuples.Runtime;
 
 public enum PotionType
 {
@@ -42,7 +42,8 @@ public class PotionsManager : MonoBehaviour
 
         if (potion == null)
         {
-            if (potions.Count >= 4) {
+            if (potions.Count >= 4)
+            {
                 Debug.Log("Max of 4 potion types");
                 return;
             }
@@ -165,7 +166,7 @@ public class PotionsManager : MonoBehaviour
         if (selectedPotion.potionType == PotionType.Water)
         {
             selectedPotion.potionTexture = waterPotion.v3;
-            
+
             if (selectedPotion.stackCount > 1)
             {
                 selectedPotion.stackCount = 0;

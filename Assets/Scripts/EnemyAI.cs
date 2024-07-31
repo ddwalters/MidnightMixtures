@@ -1,4 +1,5 @@
 using Pathfinding;
+using System.Collections;
 using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
@@ -14,7 +15,15 @@ public class EnemyAI : MonoBehaviour
     public void ActivateMovement()
     {
         aiPath.canMove = true;
-        Debug.Log("Attack");
+    }
+
+    public IEnumerator StunMovement()
+    {
+        aiPath.canMove = false;
+
+        yield return new WaitForSeconds(5);
+
+        ActivateMovement();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

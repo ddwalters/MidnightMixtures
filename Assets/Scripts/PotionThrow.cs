@@ -1,6 +1,4 @@
-using NUnit.Framework;
 using System.Collections;
-using System.Resources;
 using UnityEngine;
 
 public class PotionThrow : MonoBehaviour

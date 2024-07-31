@@ -1,21 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyDetection : MonoBehaviour
 {
     PlayerVisibility playerVis;
     EnemyAI ai;
 
-    bool inSight;
-
-    [SerializeField]
-    float baseNoticeTimer = 5f;
-
+    [SerializeField] Slider noticeSlider;
+    [SerializeField] float baseNoticeTimer = 5f;
     float copyTimer;
 
-    [SerializeField]
-    float speedMultiplier = 1.5f;
+    bool inSight;
+    bool isStunned;
 
     private void Start()
     {
@@ -23,40 +19,50 @@ public class EnemyDetection : MonoBehaviour
         ai = gameObject.GetComponentInParent<EnemyAI>();
 
         copyTimer = baseNoticeTimer;
+        noticeSlider.value = 0;
     }
 
     private void Update()
     {
-        if (inSight)
+        if (inSight && !isStunned)
         {
             var currentVis = playerVis.GetVisibility();
-            copyTimer -= Time.deltaTime * (currentVis);
-            Debug.Log(copyTimer);
-            
-            if (copyTimer < 0)
-            {
-                Debug.Log("In Sight");
 
-                ai.ActivateMovement();
+            if (currentVis > 0)
+            {
+                copyTimer -= Time.deltaTime * currentVis;
+                noticeSlider.value = Mathf.Clamp01(1 - (copyTimer / baseNoticeTimer));
+
+                if (copyTimer <= 0)
+                {
+                    ai.ActivateMovement();
+                    copyTimer = baseNoticeTimer;
+                }
             }
         }
-        else
+
+        if (copyTimer != baseNoticeTimer && !inSight || isStunned)
         {
-            copyTimer = baseNoticeTimer;
+            copyTimer = Mathf.Lerp(copyTimer, baseNoticeTimer, Time.deltaTime * 1.5f);
+            noticeSlider.value = Mathf.Clamp01(1 - (copyTimer / baseNoticeTimer));
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag != "Player") return;
+        if (collision.gameObject.CompareTag("flash"))
+        {
 
-        inSight = true;
+            StartCoroutine(ai.StunMovement());
+        }
+
+        if (collision.tag != "Player")
+            inSight = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag != "Player") return;
-
-        inSight = false;
+        if (collision.tag != "Player")
+            inSight = false;
     }
 }
