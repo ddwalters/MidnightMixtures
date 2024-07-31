@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7759037238057174073}
   - component: {fileID: 1973601376328654792}
   - component: {fileID: 4790567422440114954}
+  - component: {fileID: 6409276816690624148}
   m_Layer: 0
   m_Name: EnemyAI
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2110651766509823712}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.77925575, w: 0.6267061}
+  m_LocalRotation: {x: 0, y: 0, z: -0.77925587, w: 0.6267059}
   m_LocalPosition: {x: 1.56, y: -1.24, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -170,6 +171,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d56f96f53839133429391ffdaf8bff7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!50 &6409276816690624148
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110651766509823712}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &7629143142843047791
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,8 +380,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f06befbd27d13e4bb2779ab44c9f2b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  noticeSlider: {fileID: 0}
   baseNoticeTimer: 5
-  speedMultiplier: 1.5
 --- !u!70 &1741769669634934448
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
