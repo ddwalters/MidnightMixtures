@@ -11,7 +11,6 @@ public class EnemyDetection : MonoBehaviour
     float copyTimer;
 
     bool inSight;
-    bool isStunned;
 
     private void Start()
     {
@@ -24,7 +23,7 @@ public class EnemyDetection : MonoBehaviour
 
     private void Update()
     {
-        if (inSight && !isStunned)
+        if (inSight)
         {
             var currentVis = playerVis.GetVisibility();
 
@@ -41,7 +40,7 @@ public class EnemyDetection : MonoBehaviour
             }
         }
 
-        if (copyTimer != baseNoticeTimer && !inSight || isStunned)
+        if (copyTimer != baseNoticeTimer && !inSight)
         {
             copyTimer = Mathf.Lerp(copyTimer, baseNoticeTimer, Time.deltaTime * 1.5f);
             noticeSlider.value = Mathf.Clamp01(1 - (copyTimer / baseNoticeTimer));
@@ -50,19 +49,13 @@ public class EnemyDetection : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("flash"))
-        {
-
-            StartCoroutine(ai.StunMovement());
-        }
-
-        if (collision.tag != "Player")
+        if (collision.gameObject.CompareTag("Player"))
             inSight = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag != "Player")
+        if (collision.gameObject.CompareTag("Player"))
             inSight = false;
     }
 }

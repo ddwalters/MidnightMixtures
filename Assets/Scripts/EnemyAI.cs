@@ -14,11 +14,13 @@ public class EnemyAI : MonoBehaviour
 
     public void ActivateMovement()
     {
+        Debug.Log("move");
         aiPath.canMove = true;
     }
 
     public IEnumerator StunMovement()
     {
+        Debug.Log("stuck");
         aiPath.canMove = false;
 
         yield return new WaitForSeconds(5);
@@ -28,7 +30,12 @@ public class EnemyAI : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag != "Player") return;
+        if (collision.gameObject.CompareTag("flash"))
+        {
+            StartCoroutine(StunMovement());
+        }
+
+        if (!collision.gameObject.CompareTag("Player")) return;
 
         Debug.Log("Game end");
     }
