@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerVisibility : MonoBehaviour
 {
+    bool inShadow;
+
     [SerializeField]
     private int maxVisibility;
     [SerializeField]

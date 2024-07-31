@@ -252,7 +252,7 @@ MonoBehaviour:
     nameMap:
     - shadowPotion
     - time
-    v2: 3
+    v2: 6
     v3: {fileID: 0}
   flashPotion:
     v1: {fileID: 0}
