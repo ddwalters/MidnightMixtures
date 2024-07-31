@@ -41,5 +41,10 @@ public class levelComplete : MonoBehaviour
                 Debug.Log("Level Complete!");
             }
         }
+
+        if (col.gameObject.CompareTag("goblin"))
+        {
+            Destroy(col.gameObject);
+        }
     }
 }

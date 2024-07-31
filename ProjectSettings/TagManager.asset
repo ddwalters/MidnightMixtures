@@ -8,6 +8,7 @@ TagManager:
   - shadow
   - flash
   - boom
+  - goblin
   layers:
   - Default
   - TransparentFX
